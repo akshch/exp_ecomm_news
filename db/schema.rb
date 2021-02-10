@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_09_191805) do
+ActiveRecord::Schema.define(version: 2021_02_09_201148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "news", force: :cascade do |t|
+    t.string "author"
+    t.string "title"
+    t.text "description"
+    t.string "url"
+    t.string "image_url"
+    t.datetime "published_at"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
@@ -25,4 +37,14 @@ ActiveRecord::Schema.define(version: 2021_02_09_191805) do
     t.index ["material_code"], name: "index_products_on_material_code", unique: true
   end
 
+  create_table "sources", force: :cascade do |t|
+    t.string "slug"
+    t.string "name"
+    t.bigint "news_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["news_id"], name: "index_sources_on_news_id"
+  end
+
+  add_foreign_key "sources", "news"
 end

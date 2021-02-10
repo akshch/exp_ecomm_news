@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       resources :products, only: [:index] do
         collection { post :import }
       end
+
+      resources :news, only: [:index] do
+        collection { post :create_news_feeds }
+      end
     end
   end
 end

@@ -5,7 +5,6 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def import
-    byebug
     if csv_params[:file].present?
       result = Product.import_csv(csv_params[:file])
       if result[:success]
